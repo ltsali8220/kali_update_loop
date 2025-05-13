@@ -1,8 +1,8 @@
 # 🔧 APT Upgrade Tool
 
-A simple and reliable Bash script to safely upgrade all APT packages **one at a time**, ideal for use on **Debian-based systems** such as **Ubuntu** or **Kali Linux**.
+A simple and reliable Bash script to safely upgrade all APT packages one at a time, ideal for use on Debian-based systems such as **Ubuntu** or **Kali Linux**.
 
-This tool is especially helpful when you encounter broken or partially installed packages, offering a cleaner and more controlled upgrade process.
+This tool is especially helpful when you encounter **broken or partially installed packages**, offering a cleaner and more controlled upgrade process.
 
 ---
 
@@ -18,81 +18,89 @@ This tool is especially helpful when you encounter broken or partially installed
 
 ## 📦 Installation
 
-1. **Download or create the script file** named `upgrade.sh`:
+### 1. Download or create the script file `upgrade.sh`:
 
-   ```bash
-   #!/bin/bash
+```bash
+#!/bin/bash
 
-   if [[ "$1" == "--help" ]]; then
-       echo "Usage: upgrade"
-       echo "Safely upgrades APT packages one by one and performs cleanup."
-       exit 0
-   fi
+if [[ "$1" == "--help" ]]; then
+    echo "Usage: upgrade"
+    echo "Safely upgrades APT packages one by one and performs cleanup."
+    exit 0
+fi
 
-   sudo apt update
-   UPGRADABLE=$(apt list --upgradable | grep -oP '^\S+' | tail -n +2)
+sudo apt update
+UPGRADABLE=$(apt list --upgradable | grep -oP '^\S+' | tail -n +2)
 
-   for package in $UPGRADABLE; do
-       echo "Upgrading $package..."
-       sudo apt install --only-upgrade -y "$package"
-   done
+for package in $UPGRADABLE; do
+    echo "Upgrading $package..."
+    sudo apt install --only-upgrade -y "$package"
+done
 
-   sudo apt autoremove -y
+sudo apt autoremove -y
 
-   echo "All packages upgraded."
-Make the script executable:
+echo "All packages upgraded."
+```
 
-bash
-Copy
-Edit
+### 2. Make the script executable:
+
+```bash
 chmod +x upgrade.sh
-Move it to /usr/local/bin for global access:
+```
 
-bash
-Copy
-Edit
+### 3. Move it to `/usr/local/bin` for global access:
+
+```bash
 sudo mv upgrade.sh /usr/local/bin/upgrade
-Run it from anywhere:
+```
 
-bash
-Copy
-Edit
+### 4. Run it from anywhere:
+
+```bash
 upgrade
-💡 Use Case
-This tool is particularly useful on systems like Kali Linux, where:
+```
 
-Packages often break due to aggressive or custom installations
+---
 
-You want better visibility and control over the upgrade process
+## 💡 Use Case
 
-You want to recover from a broken APT state
+This tool is particularly useful on systems like **Kali Linux**, where:
 
-🛡️ Requirements
-A Debian-based Linux distribution
+- Packages often break due to aggressive or custom installations
+- You want better visibility and control over the upgrade process
+- You want to recover from a broken or inconsistent APT state
 
-APT package manager (apt)
+---
 
-sudo privileges
+## 🛡️ Requirements
 
-⏰ Optional Automation
-To automate upgrades, add the script to your crontab:
+- Debian-based Linux distribution (e.g., Ubuntu, Kali, Debian)
+- `apt` package manager
+- `sudo` privileges
 
-bash
-Copy
-Edit
+---
+
+## ⏰ Optional Automation
+
+To automate upgrades, add the tool to your crontab:
+
+```bash
 crontab -e
+```
+
 Example entry to run weekly at 2 AM:
 
-bash
-Copy
-Edit
+```bash
 0 2 * * 1 /usr/local/bin/upgrade >> /var/log/apt-upgrade.log 2>&1
-🪪 License
-This project is licensed under the MIT License.
+```
 
-sql
-Copy
-Edit
+---
+
+## 🪪 License
+
+This project is licensed under the **MIT License**.
+
+```
 MIT License
 
 Copyright (c) 2025
@@ -114,13 +122,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-🤝 Contributions
-Contributions are welcome. If you have suggestions or improvements, feel free to submit a pull request or open an issue.
+```
 
-vbnet
-Copy
-Edit
+---
 
-Let me know if you'd like this exported as a downloadable `.md` file or formatted for GitHub Pages.
+## 🤝 Contributions
 
+Contributions are welcome! If you have suggestions or improvements, feel free to submit a pull request or open an issue.
 
+---
